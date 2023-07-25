@@ -1,0 +1,71 @@
+<nz-layout>
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+    <div class="sidebar-logo">
+      <a routerLink="/sesion/ban/inicio">
+        <h1>Cuentas por Cobrar</h1>
+      </a>
+    </div>
+    <!-- <div class="wrapper"> -->
+    <!-- <button nz-button nzType="primary" (click)="toggleCollapsed()">
+        <span
+          nz-icon
+          [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        ></span>
+      </button> -->
+    <ul
+      nz-menu
+      nzTheme="dark"
+      nzMode="inline"
+      [nzInlineCollapsed]="isCollapsed"
+    >
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/sesion/ban/inicio">Cuentas Bancarias</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/sesion/cli/inicio">Clientes</a>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Transacciones" nzIcon="dashboard">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/sesion/cob/inicio">Cobros</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Reportes" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/sesion/deu/inicio">Estado Cuenta Clientes</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/sesion/pag/inicio">Pagos de Clientes</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Auditoría" nzIcon="schedule">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/sesion/aud/bancaria">Cuenta Bancaria</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/sinsesion/login">Cerrar Sesión</a>
+      </li>
+    </ul>
+    <!-- </div> -->
+  </nz-sider>
+  <nz-layout>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

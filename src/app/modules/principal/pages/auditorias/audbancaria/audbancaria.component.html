@@ -1,0 +1,64 @@
+<h1>CUENTAS BANCARIAS</h1>
+<div>
+  <div>
+    <form class="row g-3" [formGroup]="estado">
+      <div class="col-md-2">
+        <label class="form-label">FECHA INICIO</label>
+        <input type="date" class="form-control" formControlName="fechaIni" />
+        <div
+          *ngIf="
+            estado.get('fechaIni')?.errors && estado.get('fechaIni')?.touched
+          "
+        >
+          <p style="color: #490367; font-family: sans-seri">
+            - Es obligatorio una fecha de inicio
+          </p>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">FECHA FIN</label>
+        <input type="date" class="form-control" formControlName="fechaFin" />
+        <div
+          *ngIf="
+            estado.get('fechaFin')?.errors && estado.get('fechaFin')?.touched
+          "
+        >
+          <p style="color: #490367; font-family: sans-seri">
+            - Es obligatorio una fecha de fin
+          </p>
+        </div>
+      </div>
+      <div class="col-md-1 mt-5">
+        <div class="col-md-2">
+          <button type="button" class="ov-btn-slide-top" (click)="getAuditorias()">Cargar</button>
+        </div>
+      </div>
+    </form>
+    <h2>{{mensaje}}</h2>
+  </div>
+</div>
+<br />
+<div class="col-20">
+  <table class="table table-sm">
+    <thead style="background-color: white">
+      <tr>
+        <th nzWidth="10%" nzAlign="center">Código</th>
+        <th nzWidth="10%" nzAlign="center">Usuario</th>
+        <th nzWidth="10%" nzAlign="center">Fecha</th>
+        <th nzWidth="20%" nzAlign="center">Acción</th>
+        <th nzWidth="38%" nzAlign="center">Módulo</th>
+        <th nzWidth="10%" nzAlign="center">Funcionalidad</th>
+        <th nzWidth="12%" nzAlign="center">Observación</th>
+      </tr>
+      <tr *ngFor="let data of ListarAuditorias">
+        <td nzAlign="center" nz>{{ data.aud_id }}</td>
+        <td nzAlign="center" nz>1004192371</td>
+        <td nzAlign="center">{{ data.aud_fecha | date : "dd/MM/yyyy" }}</td>
+        <td nzAlign="center">{{ data.aud_accion }}</td>
+        <td nzAlign="center">{{ data.aud_modulo }}</td>
+        <td nzAlign="center">{{ data.aud_funcionalidad }}</td>
+        <td nzAlign="center">{{ data.aud_observacion }}</td>
+      </tr>
+    </thead>
+  </table>
+</div>

@@ -1,0 +1,137 @@
+[nz-button] {
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+
+h1 {
+  margin: 0 0 10px;
+  padding: 0;
+  color: #490367;
+  text-align: center;
+  font-family: "sans-seri";
+}
+
+//AGREGAR
+.ov-btn-slide-top {
+  background: white; /* color de fondo */
+  color: #490367; /* color de fuente */
+  border: 2px solid #490367; /* tamaño y color de borde */
+  padding: 6px 22px;
+  border-radius: 5px; /* redondear bordes */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+}
+.ov-btn-slide-top:hover {
+  color: white; /* color de fuente hover */
+}
+.ov-btn-slide-top::after {
+  content: "";
+  background: #490367; /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 16px 20px;
+  display: block;
+  left: 0;
+  right: 0;
+  top: -100%;
+  bottom: 100%;
+  -webkit-transition: all 0.35s;
+  transition: all 0.35s;
+}
+.ov-btn-slide-top:hover::after {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  -webkit-transition: all 0.35s;
+  transition: all 0.35s;
+}
+
+h2 {
+  margin: 0 0 10px;
+  padding: 0;
+  color: #490367;
+  text-align: left;
+  font-family: "sans-seri";
+}
+//editar
+.ov-btn-slide-topr {
+  background: white; /* color de fondo */
+  color: #490367; /* color de fuente */
+  border: 2px solid white; /* tamaño y color de borde */
+  padding: 6px 6px;
+  border-radius: 5px; /* redondear bordes */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+.ov-btn-slide-topr:hover {
+  color: rgb(176, 235, 25); /* color de fuente hover */
+}
+.ov-btn-slide-topr::after {
+  content: "";
+  background: white; /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 16px 20px;
+  display: block;
+  left: 0;
+  right: 0;
+  top: -100%;
+  bottom: 100%;
+  -webkit-transition: all 0.35s;
+  transition: all 0.35s;
+}
+.ov-btn-slide-topr:hover::after {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  -webkit-transition: all 0.35s;
+  transition: all 0.35s;
+}
+
+//eliminar
+.ov-btn-slide-tope {
+  background: white; /* color de fondo */
+  color: #490367; /* color de fuente */
+  border: 2px solid while; /* tamaño y color de borde */
+  padding: 6px 6px;
+  border-radius: 5px; /* redondear bordes */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+.ov-btn-slide-tope:hover {
+  color: rgb(225, 14, 14); /* color de fuente hover */
+}
+.ov-btn-slide-tope::after {
+  content: "";
+  background: white; /* color de fondo hover */
+  position: absolute;
+  z-index: -1;
+  padding: 16px 20px;
+  display: block;
+  left: 0;
+  right: 0;
+  top: -100%;
+  bottom: 100%;
+  -webkit-transition: all 0.35s;
+  transition: all 0.35s;
+}
+.ov-btn-slide-tope:hover::after {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  -webkit-transition: all 0.35s;
+  transition: all 0.35s;
+}

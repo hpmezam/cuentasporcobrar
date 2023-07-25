@@ -1,0 +1,126 @@
+<div>
+  <h1>ESTADO DE CUENTA DE CLIENTES</h1>
+  <div>
+    <form class="row g-3" [formGroup]="estado">
+      <div class="col-md-2">
+        <label class="form-label">FECHA INICIO</label>
+        <input type="date" class="form-control" formControlName="fechaIni" />
+        <div
+          *ngIf="
+            estado.get('fechaIni')?.errors && estado.get('fechaIni')?.touched
+          "
+        >
+          <p style="color: #490367; font-family: sans-seri">
+            - Es obligatorio una fecha de inicio
+          </p>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">FECHA FIN</label>
+        <input type="date" class="form-control" formControlName="fechaFin" />
+        <div
+          *ngIf="
+            estado.get('fechaFin')?.errors && estado.get('fechaFin')?.touched
+          "
+        >
+          <p style="color: #490367; font-family: sans-seri">
+            - Es obligatorio una fecha de fin
+          </p>
+        </div>
+      </div>
+      <nz-col nzSpan="5">
+        <nz-form-label for="identificacion" nzRequired>CLIENTE</nz-form-label>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Seleccione cliente">
+            <select
+              class="form-select"
+              formControlName="cedulaCli"
+              (change)="clienteSelect($event)"
+              style="border: 2px solid #490367"
+            >
+              <option disabled selected value="" style="color: lightgrey">
+                Seleccione cliente...
+              </option>
+              <option
+                [ngValue]="cliente.cedulaCli"
+                *ngFor="let cliente of ListarClientes"
+              >
+                {{ cliente.nombresCli }}
+              </option>
+            </select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <div class="col-md-1 mt-5">
+        <div class="col-md-2">
+          <button
+            (click)="generarPDF()"
+            type="button"
+            class="ov-btn-slide-top"
+          >
+            <span nz-icon nzType="printer" nzTheme="outline"></span>
+          </button>
+        </div>
+      </div>
+    </form>
+    <h2>{{ mensaje }}</h2>
+    <div class="col-20">
+      <table class="table table-sm">
+        <thead style="background-color: white;">
+          <tr>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Descripción</th>
+            <th style="text-align: center">Fecha</th>
+            <th style="text-align: center">ID banco</th>
+            <th style="text-align: center">Cédula cliente</th>
+            <th style="text-align: center">Total pagar</th>
+            <th style="text-align: center">DETALLES</th>
+          </tr>
+
+          <tr *ngFor="let cabecera of ListarFacturas">
+            <td style="text-align: center">{{ cabecera.idPC }}</td>
+            <td style="text-align: center">{{ cabecera.descripcionPC }}</td>
+            <td style="text-align: center">
+              {{ cabecera.fechaPC | date : "d/M/yy" }}
+            </td>
+            <td style="text-align: center">{{ cabecera.idCB }}</td>
+            <td style="text-align: center">{{ cabecera.cedulaCli }}</td>
+            <td style="text-align: center">
+              {{ cabecera.totalPD | currency : "USD" | lowercase }}
+            </td>
+
+            <td>
+              <table class="table table-sm border-dark table-info">
+                <tr>
+                  <th style="text-align: center">ID detalle</th>
+                  <th style="text-align: center">Número factura</th>
+                  <th style="text-align: center">Valor pagar</th>
+                  <th style="text-align: center">Saldo factura</th>
+                  <th style="text-align: center">Total Factura</th>
+                </tr>
+                <tr *ngFor="let detalle of cabecera.detalles">
+                  <td style="text-align: center">{{ detalle.idPD }}</td>
+                  <td style="text-align: center">{{ detalle.numeroFac }}</td>
+                  <td style="text-align: center">
+                    {{ detalle.valorApagar | currency : "USD" | lowercase }}
+                  </td>
+                  <td style="text-align: center">
+                    {{ detalle.saldoFac | currency : "USD" | lowercase }}
+                  </td>
+                  <td style="text-align: center">
+                    {{
+                      detalle.saldoFac + detalle.valorApagar
+                        | currency : "USD"
+                        | lowercase
+                    }}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="row mt-4"></div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<router-outlet></router-outlet>
+<h1>CUENTAS BANCARIAS</h1>
+<div class="col-md-2">
+  <button
+    routerLink="/sesion/ban/agregar"
+    type="button"
+    class="ov-btn-slide-top"
+  >
+    <i class="fas fa-arrow-left"></i>
+    Agregar
+  </button>
+</div>
+<br />
+<div class="col-20">
+  <table class="table table-sm">
+    <thead style="background-color: white;">
+      <tr>
+        <th nzWidth="10%" nzAlign="center">Código</th>
+        <th nzWidth="10%" nzAlign="center">Nombre</th>
+        <th nzWidth="20%" nzAlign="center">Entidad</th>
+        <th nzWidth="38%" nzAlign="center">Descripción</th>
+        <th nzWidth="10%" nzAlign="center">Estado</th>
+        <th nzWidth="12%" nzAlign="center">Opción</th>
+      </tr>
+
+      <tr *ngFor="let data of listaCuentaBancaria">
+        <td nzAlign="center" nz>{{ data.idCB }}</td>
+        <td nzAlign="center">{{ data.nombreCB }}</td>
+        <td nzAlign="center">{{ data.entidadCB }}</td>
+        <td nzAlign="center">{{ data.descripcionCB }}</td>
+        <td nzAlign="center">
+          {{ data.estadoCB ? "Habilitado" : "Deshabilitado" }}
+        </td>
+        <td nzAlign="center">
+          <button
+            class="ov-btn-slide-topr"
+            nz-button
+            nzType="link"
+            [routerLink]="['/sesion/ban/modificar', data.idCB]"
+          >
+            <span nz-icon nzType="edit" nzTheme="outline"></span>
+          </button>
+          <button
+            class="ov-btn-slide-tope"
+            nz-button
+            nzType="link"
+            (click)="Eliminar(data.idCB)"
+          >
+            <span nz-icon nzType="delete" nzTheme="outline"></span>
+          </button>
+        </td>
+      </tr>
+    </thead>
+  </table>
+</div>

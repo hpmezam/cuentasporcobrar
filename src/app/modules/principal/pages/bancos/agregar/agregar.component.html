@@ -1,0 +1,143 @@
+<router-outlet></router-outlet>
+<h2>NUEVA CUENTA BANCARIA</h2>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event)">
+  <nz-form-label for="codigo">CÓDIGO</nz-form-label>
+  <nz-form-item>
+    <div style="color: blue">{{ codigo + contador }}</div>
+  </nz-form-item>
+  <nz-form-label for="nombre" nzRequired>NOMBRE</nz-form-label>
+  <nz-form-item>
+    <nz-form-control>
+      <input
+        nz-input
+        formControlName="nombreCB"
+        id="nombreCB"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          validateForm.get('nombreCB')?.errors &&
+          validateForm.get('nombreCB')?.touched
+        "
+      >
+        <p
+          *ngIf="validateForm.get('nombreCB')?.hasError"
+          style="color: #490367; font-family: sans-seri"
+        >
+          - El campo nombre esta vacío
+        </p>
+        <p
+          *ngIf="validateForm.get('nombreCB')?.hasError('pattern')"
+          style="color: #490367; font-family: sans-seri"
+        >
+          - Digite solo LETRAS y solo UN espacio en BLANCO.
+        </p>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-label for="entidad" nzRequired>ENTIDAD</nz-form-label>
+  <nz-form-item>
+    <nz-form-control>
+      <input
+        nz-input
+        formControlName="entidadCB"
+        id="entidadCB"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          validateForm.get('entidadCB')?.errors &&
+          validateForm.get('entidadCB')?.touched
+        "
+      >
+        <p
+          *ngIf="validateForm.get('entidadCB')?.hasError"
+          style="color: #490367; font-family: sans-seri"
+        >
+          - El campo entidad esta vacío
+        </p>
+        <p
+          *ngIf="validateForm.get('entidadCB')?.hasError('pattern')"
+          style="color: #490367; font-family: sans-seri"
+        >
+          - Digite solo LETRAS y solo UN espacio en BLANCO.
+        </p>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-label for="descripcion" nzRequired>DESCRIPCIÓN</nz-form-label>
+  <nz-form-item>
+    <nz-form-control>
+      <input
+        nz-input
+        formControlName="descripcionCB"
+        id="descripcionCB"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          validateForm.get('descripcionCB')?.errors &&
+          validateForm.get('descripcionCB')?.touched
+        "
+      >
+        <p
+          *ngIf="validateForm.get('descripcionCB')?.hasError"
+          style="color: #490367; font-family: sans-seri"
+        >
+          - El campo descripción esta vacío
+        </p>
+        <p
+          *ngIf="validateForm.get('descripcionCB')?.hasError('pattern')"
+          style="color: #490367; font-family: sans-seri"
+        >
+          - Digite solo LETRAS y solo UN espacio en BLANCO.
+        </p>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-col nzSpan="7">
+    <nz-form-label for="identificacion" nzRequired>ESTADO</nz-form-label>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Seleccione estado">
+        <select
+          class="form-select"
+          formControlName="estadoCB"
+          style="border: 2px solid #490367"
+        >
+          <option disabled selected value="" style="color: lightgrey">
+            Seleccione estado...
+          </option>
+          <option value="true">Habilitado</option>
+          <option value="false">Deshabilitado</option>
+        </select>
+      </nz-form-control>
+    </nz-form-item>
+  </nz-col>
+  <nz-form-item>
+    <nz-form-control>
+      <button
+        nz-button
+        routerLink="/sesion/ban/inicio"
+        class="ov-btn-slide-topr"
+      >
+        Regresar
+      </button>
+      <button
+        nz-button
+        nzType="dashed"
+        (click)="resetForm()"
+        class="ov-btn-slide-topr"
+      >
+        Limpiar
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        type="submit"
+        class="ov-btn-slide-topr"
+      >
+        Agregar
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

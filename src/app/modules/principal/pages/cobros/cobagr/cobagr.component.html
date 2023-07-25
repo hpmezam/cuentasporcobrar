@@ -1,0 +1,360 @@
+<router-outlet></router-outlet>
+<h2>NUEVO COBRO</h2>
+<form nz-form [formGroup]="validateForm">
+  <nz-row [nzGutter]="8">
+    <nz-col nzSpan="3">
+      <nz-form-label for="idPC">ID COBRO</nz-form-label>
+      <nz-form-item>
+        <div style="color: blue">{{ idCobro + y }}</div>
+      </nz-form-item>
+    </nz-col>
+    <nz-col nzSpan="2">
+      <nz-form-label for="fechaPC">FECHA</nz-form-label>
+      <nz-form-item>
+        <div style="color: blue">{{ fecha | date : "dd/MM/yyyy" }}</div>
+      </nz-form-item>
+    </nz-col>
+    <!-- <nz-col nzSpan="5">
+      <nz-form-label for="identificacion" nzRequired>CLIENTE</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Seleccione cliente">
+          <select
+            class="form-select"
+            (change)="clienteSelect1($event)"
+            style="border: 2px solid #490367"
+          >
+            <option disabled selected value="" style="color: lightgrey">
+              Seleccione cliente...
+            </option>
+            <option
+              [value]="cliente.id"
+              *ngFor="let cliente of listaClientes"
+            >
+              {{ cliente.nombre }}
+            </option>
+          </select>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col> -->
+    <nz-col nzSpan="5">
+      <nz-form-label for="identificacion" nzRequired>CLIENTE</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Seleccione cliente">
+          <select
+            class="form-select"
+            formControlName="cedulaCli"
+            (change)="clienteSelect($event)"
+            style="border: 2px solid #490367"
+          >
+            <option disabled selected value="" style="color: lightgrey">
+              Seleccione cliente...
+            </option>
+            <option
+              [value]="cliente.Identificacion"
+              *ngFor="let cliente of ListarClientes"
+            >
+              {{ cliente.Nombre }}
+            </option>
+          </select>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col nzSpan="5">
+      <nz-form-label for="cuenta" nzRequired>CUENTA BANCARIA</nz-form-label>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Seleccione cuenta bancaria">
+          <select
+            class="form-select"
+            formControlName="idCB"
+            style="border: 2px solid #490367"
+          >
+            <option disabled selected value="" style="color: lightgrey">
+              Seleccione cuenta...
+            </option>
+            <option
+              [ngValue]="CuentaB.idCB"
+              *ngFor="let CuentaB of listaCuentBan"
+            >
+              {{ CuentaB.nombreCB }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              validateForm.get('idCBC')?.errors &&
+              validateForm.get('idCB')?.touched
+            "
+          >
+            <p style="color: #490367; font-family: sans-seri">
+              - El campo descripción esta vacío
+            </p>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+    <nz-col nzSpan="8">
+      <nz-form-label for="nombre" nzRequired>DESCRIPCIÓN</nz-form-label>
+      <nz-form-item>
+        <nz-form-control>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="descripcionPC"
+            placeholder="Ingrese texto..."
+          />
+          <div
+            *ngIf="
+              validateForm.get('descripcionPC')?.errors &&
+              validateForm.get('descripcionPC')?.touched
+            "
+          >
+            <p style="color: #490367; font-family: sans-seri">
+              - El campo descripción esta vacío
+            </p>
+            <p
+              *ngIf="validateForm.get('descripcionPC')?.hasError('pattern')"
+              style="color: #490367; font-family: sans-seri"
+            >
+              - Digite solo LETRAS y solo UN espacio en BLANCO.
+            </p>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+  </nz-row>
+
+  <div *ngIf="cliseleccionado">
+    <!-- <div style="color: blue; height: 25; width: 25">
+      <strong
+        style="
+          color: crimson;
+          height: 25;
+          width: 25;
+          font-family: Arial, sans-serif;
+        "
+      >
+        Cédula:
+      </strong>
+      {{ clienteSeleccionado.id }}
+      <strong
+        style="
+          color: crimson;
+          height: 25;
+          width: 25;
+          font-family: Arial, sans-serif;
+        "
+      >
+        Nombre:
+      </strong>
+      {{ clienteSeleccionado.nombre }}
+    </div> -->
+    <div
+      style="
+        margin: 0 0 10px;
+        padding: 0;
+        text-align: left;
+        color: #490367;
+        font-family: sans-serif;
+        font-size: 18px;
+      "
+    >
+      <span
+        style="
+          margin: 0 0 10px;
+          padding: 0;
+          text-align: left;
+          color: #191a11;
+          font-family: sans-serif;
+          font-size: 20px;
+        "
+        >CLIENTE:
+      </span>
+      <span>Cédula </span>
+      {{ cliseleccionado.Identificacion }}
+      <span>Nombre </span>
+      {{ cliseleccionado.Nombre }}
+      <span>Dirección </span>
+      {{ cliseleccionado.Direccion }}
+      <span>Teléfono </span>
+      {{ cliseleccionado.Telefono }}
+      <span>Correo </span>
+      {{ cliseleccionado.CorreoElectronico }}
+    </div>
+    <nz-divider nzText="FACTURAS" nzOrientation="left"></nz-divider>
+    <!-- <nz-table
+      #basicTable
+      [nzData]="clienteSeleccionado.facturas"
+      [nzFrontPagination]="false"
+      [nzShowPagination]="false"
+    >
+      <thead>
+        <tr>
+          <th nzWidth="20%" nzAlign="center">N° FACTURA</th>
+          <th nzWidth="15%" nzAlign="center">SUBTOTAL</th>
+          <th nzWidth="10%" nzAlign="center">IVA</th>
+          <th nzWidth="20%" nzAlign="center">TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let data of basicTable.data; let a = index"
+          (click)="seleccionarFactura1(data)"
+        >
+          <td nzAlign="center" nz>{{ data.id }}</td>
+          <td nzAlign="center">
+            {{ data.subtotal | currency : "USD" | lowercase }}
+          </td>
+          <td nzAlign="center">
+            {{ data.iva | currency : "USD" | lowercase }}
+          </td>
+          <td nzAlign="center">
+            {{ data.total | currency : "USD" | lowercase }}
+          </td>
+        </tr>
+      </tbody>
+    </nz-table> -->
+    <table class="table table-sm border-dark">
+      <thead>
+        <tr>
+          <th nzWidth="20%" nzAlign="center">N° FACTURA</th>
+          <th nzWidth="20%" nzAlign="center">CÉDULA</th>
+          <th nzWidth="20%" nzAlign="center">FECHA</th>
+          <!-- <th nzWidth="10%" nzAlign="center">HORA</th> -->
+          <th nzWidth="20%" nzAlign="center">SUBTOTAL</th>
+          <th nzWidth="10%" nzAlign="center">IVA</th>
+          <th nzWidth="20%" nzAlign="center">TOTAL</th>
+        </tr>
+      </thead>
+
+      <tr
+        *ngFor="let data of clienteSeleccionado; let a = index"
+        (click)="seleccionarFactura(data)"
+      >
+        <td nzAlign="center" nz>{{ data.IdFacturaCabecera }}</td>
+        <td nzAlign="center" nz>{{ data.IdentificacionCliente }}</td>
+        <td nzAlign="center">{{ data.FechaFactura| date : "dd/MM/yyyy" }}</td>
+        <!-- <td nzAlign="center">{{ data.FechaFactura | date : "HH:mm" }}</td> -->
+        <td nzAlign="center">
+          {{ data.Subtotal | currency : "USD" | lowercase }}
+        </td>
+        <td nzAlign="center">
+          {{ data.Iva | currency : "USD" | lowercase }}
+        </td>
+        <td nzAlign="center">
+          {{ data.Total | currency : "USD" | lowercase }}
+        </td>
+      </tr>
+    </table>
+    <div style="color: rgb(211, 27, 27); height: 25; width: 25">
+      Recuerda seleccionar una factura!
+      <span nz-icon nzType="arrow-up" nzTheme="outline"></span>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 mt-2" style="text-align: center">
+        <label
+          for="inputPassword4"
+          class="form-label"
+          style="text-align: center"
+          >FACTURA</label
+        >
+        <br />
+        <div class="form-control" style="text-align: center">{{ idFac }}</div>
+      </div>
+      <div class="col-md-2 mt-2" style="text-align: center">
+        <label for="inputPassword4" class="form-label">TOTAL</label>
+        <br />
+        <div class="form-control" style="text-align: center">
+          {{ totalFac | currency : "USD" | lowercase }}
+        </div>
+      </div>
+      <div class="col-md-2 mt-2" style="text-align: center">
+        <label for="inputPassword4" class="form-label">SALDO FACTURA</label>
+        <br />
+        <div class="form-control" style="text-align: center">
+          {{ saldoFac | currency : "USD" | lowercase }}
+        </div>
+      </div>
+      <div class="col-md-2 mt-2" style="text-align: center">
+        <label for="inputPassword4" class="form-label">PAGO</label>
+        <input
+          min="1"
+          type="number"
+          class="form-control"
+          formControlName="pago"
+          style="text-align: center"
+        />
+        <div
+          class="alert alert-danger"
+          *ngIf="validateForm.get('pago')?.hasError('pattern')"
+        >
+          <p>Ingrese un numero Valido Sin +/-</p>
+        </div>
+      </div>
+      <div class="col-md-2 mt-2" style="text-align: center">
+        <label for="inputPassword4" class="form-label">-</label>
+        <br />
+        <button
+          (click)="agregarDetalle()"
+          [disabled]="validateForm.get('pago')?.hasError('pattern')"
+          class="ov-btn-slide-top"
+        >
+          Agregar
+        </button>
+      </div>
+    </div>
+    <h2 style="color: #490367; font-family: sans-seri">{{ mensaje }}</h2>
+    <nz-divider nzText="NÓMINA DE COBRO" nzOrientation="left"></nz-divider>
+    <div class="container mt-5">
+      <table class="table table-sm">
+        <thead style="background-color: white">
+          <tr>
+            <th scope="col" style="text-align: center">N° FACTURA</th>
+            <th scope="col" style="text-align: center">SALDO</th>
+            <th scope="col" style="text-align: center">PAGO</th>
+            <th scope="col" style="text-align: center">ELIMINAR</th>
+          </tr>
+          <tr *ngFor="let detalles of ListarDetalles; let i = index">
+            <td style="text-align: center">{{ detalles.numeroFac }}</td>
+            <td style="text-align: center">
+              {{ detalles.saldoFac | currency : "USD" | lowercase }}
+            </td>
+            <td style="text-align: center">
+              {{ detalles.valorApagar | currency : "USD" | lowercase }}
+            </td>
+            <td style="text-align: center">
+              <button
+                (click)="eliminar(i)"
+                type="button"
+                class="ov-btn-slide-top"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center">---</td>
+            <td style="text-align: center">TOTAL</td>
+            <td style="text-align: center">
+              {{ totalCob | currency : "USD" | lowercase }}
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <nz-form-item>
+      <nz-form-control>
+        <button
+          nz-button
+          routerLink="/sesion/cob/inicio"
+          class="ov-btn-slide-topr"
+        >
+          Regresar
+        </button>
+        <button (click)="Agregar($event)" class="ov-btn-slide-topr">
+          Guardar
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+    <h2 style="color: #490367; font-family: sans-seri">{{ mensajef }}</h2>
+  </div>
+</form>

@@ -1,0 +1,40 @@
+<router-outlet></router-outlet>
+<h1>NÓMINA DE CLIENTES</h1>
+<!-- <div class="col-20">
+  <table class="table table-sm border-dark">
+    <thead>
+      <tr>
+        <th nzWidth="10%" nzAlign="center">Cédula</th>
+        <th nzWidth="18%" nzAlign="center">Nombre</th>
+      </tr>
+      <tr *ngFor="let data of listaClientes">
+        <td nzAlign="center" nz>{{ data.id }}</td>
+        <td nzAlign="center">{{ data.nombre }}</td>
+      </tr>
+    </thead>
+  </table>
+</div> -->
+<div class="col-20">
+  <table class="table table-sm">
+    <thead style="background-color: white;">
+      <tr>
+        <th nzWidth="10%" nzAlign="center">Cédula</th>
+        <th nzWidth="18%" nzAlign="center">Nombre</th>
+        <th nzWidth="10%" nzAlign="center">F. Nacimi</th>
+        <th nzWidth="15%" nzAlign="center">Dirección</th>
+        <th nzWidth="10%" nzAlign="center">Teléfono</th>
+        <th nzWidth="17%" nzAlign="center">Correo</th>
+        <th nzWidth="12%" nzAlign="center">Estado</th>
+      </tr>
+      <tr *ngFor="let data of listaClientes">
+        <td nzAlign="center" nz>{{ data.Identificacion }}</td>
+        <td nzAlign="center">{{ data.Nombre }}</td>
+        <td nzAlign="center">{{ data.FechaNacimiento | date:'dd/MM/yyyy'  }}</td>
+        <td nzAlign="center">{{ data.Direccion }}</td>
+        <td nzAlign="center">{{ data.Telefono }}</td>
+        <td nzAlign="center">{{ data.CorreoElectronico }}</td>
+        <td nzAlign="center">{{ data.Estado }}</td>
+      </tr>
+    </thead>
+  </table>
+</div>

@@ -1,0 +1,37 @@
+<router-outlet></router-outlet>
+<h1>NÓMINA DE COBROS</h1>
+<div class="col-md-2">
+  <button
+    routerLink="/sesion/cob/agregar"
+    type="button"
+    class="ov-btn-slide-top"
+  >
+    <i class="fas fa-arrow-left"></i>
+    Agregar
+  </button>
+</div>
+<br />
+<div class="col-20">
+  <table class="table table-sm">
+    <thead style="background-color: white;">
+      <tr>
+        <th nzWidth="10%" nzAlign="center">ID</th>
+        <th nzWidth="18%" nzAlign="center">Descripción</th>
+        <th nzWidth="10%" nzAlign="center">Fecha</th>
+        <!-- <th nzWidth="10%" nzAlign="center">Hora</th> -->
+        <th nzWidth="10%" nzAlign="center">Cliente</th>
+        <th nzWidth="17%" nzAlign="center">Cuenta Bancaria</th>
+        <th nzWidth="15%" nzAlign="center">Total</th>
+      </tr>
+      <tr *ngFor="let data of listaCabeceras">
+        <td nzAlign="center" nz>{{ data.idPC }}</td>
+        <td nzAlign="center">{{ data.descripcionPC }}</td>
+        <td nzAlign="center">{{ data.fechaPC | date:'dd/MM/yyyy' }}</td>
+        <!-- <td nzAlign="center">{{ data.fechaPC | date:'HH:mm'  }}</td> -->
+        <td nzAlign="center">{{ data.cedulaCli }}</td>
+        <td nzAlign="center">{{ data.idCB }}</td>
+        <td nzAlign="center">{{ data.totalPD | currency : "USD" | lowercase  }}</td>
+      </tr>
+    </thead>
+  </table>
+</div>
